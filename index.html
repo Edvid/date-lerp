@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    #grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  </style>
+  <script>
+    function dateLerp (StartDate, EndDate, StartValue, EndValue) {
+      const now = new Date();
+      const toEndDiff = EndDate.getTime() - StartDate.getTime();
+      const toNowDiff = now.getTime() - StartDate.getTime() + (StartDate.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
+      const ratio = toNowDiff / toEndDiff;
+      return StartValue + ratio;
+    }
+
+    let startYear;
+    let startMonth;
+    let startDay;
+
+    let endYear;
+    let endMonth;
+    let endDay;
+
+    function setStartYear(val) {
+      startYear = val;
+    }
+    function setStartMonth(val) {
+      startMonth = val;
+    }
+    function setStartDay(val) {
+      startDay = val;
+    }
+    function setEndYear(val) {
+      endYear = val;
+    }
+    function setEndMonth(val) {
+      endMonth = val;
+    }
+    function setEndDay(val) {
+      endDay = val;
+    }
+
+    function main () {
+      startYear = document.querySelector("#year-start").value
+      startMonth = document.querySelector("#month-start").value
+      startDay = document.querySelector("#day-start").value
+
+      endYear = document.querySelector("#year-end").value
+      endMonth = document.querySelector("#month-end").value
+      endDay = document.querySelector("#day-end").value
+
+      const loop = () => {
+        const startDate = new Date(startYear, startMonth - 1, startDay, 0, 0, 0);
+        const endDate = new Date(endYear, endMonth - 1, endDay, 0, 0, 0);
+        document.querySelector("#date-lerp").innerHTML = dateLerp(startDate, endDate, 0, 100);
+      }
+      setInterval(loop,1000);
+    }
+  </script>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Date Lerp</title>
+  </head>
+  <body onload="main()">
+    <div id="grid">
+      <div>
+        <label>start Date</label>
+        <form>
+          <label>Year</label>
+          <input type="text" id="year-start" name="year" onload="setStartYear(this.value)" oninput="setStartYear(this.value)"/>
+          <label>Month</label>
+          <input type="text" id="month-start" name="month" oninput="setStartMonth(this.value)"/>
+          <label>day</label>
+          <input type="text" id="day-start" name="day" oninput="setStartDay(this.value)"/>
+        </form>
+        <label>end Date</label>
+        <form>
+          <label>Year</label>
+          <input type="text" id="year-end" name="year" oninput="setEndYear(this.value)"/>
+          <label>Month</label>
+          <input type="text" id="month-end" name="month" oninput="setEndMonth(this.value)"/>
+          <label>day</label>
+          <input type="text" id="day-end" name="day" oninput="setEndDay(this.value)"/>
+        </form>
+      </div>
+      <div>
+        <p id="date-lerp">loading...</p>
+      </div>
+    </div>
+
+  </body>
+</html>
