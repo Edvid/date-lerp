@@ -60,10 +60,10 @@
     let endValue;
 
     function setStartDate(val) {
-      endMonth = val;
+      startDate = val;
     }
     function setEndDate(val) {
-      endDay = val;
+      endDate = val;
     }
 
     function setStartValue(val) {
@@ -99,7 +99,7 @@
         <label>Start Date:</label>
         <form>
           <label>Date</label>
-          <input type="date" id="date-start" name="date" onload="setStartDate(new Date(this.value))" oninput="setStartYear(this.value)"/>
+          <input type="date" id="date-start" name="date" onload="setStartDate(new Date(this.value))" oninput="setStartDate(this.value)"/>
           <br/>
           <label>Value</label>
           <input type="text" id="value-start" name="value" oninput="setStartValue(this.value)"/>
