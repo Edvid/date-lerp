@@ -2,10 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <style>
+
     body {
       background: rgb(40, 40, 40);
       color: rgb(255, 255, 255);
     }
+
     #grid {
       height: calc(100svh - 16px);
       margin: 3em;
@@ -34,6 +36,7 @@
     #date-lerp {
       font-size: 6em;
     }
+
   </style>
   <script>
     function dateLerp (StartDate, EndDate, StartValue, EndValue) {
@@ -82,6 +85,7 @@
         document.querySelector("#date-lerp").innerHTML = lerp.toFixed(5)
       }
       setInterval(loop,1000);
+      loop();
     }
   </script>
   <head>
