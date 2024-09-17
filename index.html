@@ -9,11 +9,17 @@
   </style>
   <script>
     function dateLerp (StartDate, EndDate, StartValue, EndValue) {
+      if(StartDate == "Invalid Date") {
+        return "Invalid Start Date"
+      }
+      if(EndDate == "Invalid Date") {
+        return "Invalid End Date"
+      }
       const now = new Date();
       const toEndDiff = EndDate.getTime() - StartDate.getTime();
       const toNowDiff = now.getTime() - StartDate.getTime() + (StartDate.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
       const ratio = toNowDiff / toEndDiff;
-      return StartValue + ratio;
+      return +StartValue + ratio * (endValue - StartValue);
     }
 
     let startYear;
@@ -23,6 +29,9 @@
     let endYear;
     let endMonth;
     let endDay;
+
+    let startValue;
+    let endValue;
 
     function setStartYear(val) {
       startYear = val;
@@ -42,6 +51,12 @@
     function setEndDay(val) {
       endDay = val;
     }
+    function setStartValue(val) {
+      startValue = val;
+    }
+    function setEndValue(val) {
+      endValue = val;
+    }
 
     function main () {
       startYear = document.querySelector("#year-start").value
@@ -52,10 +67,13 @@
       endMonth = document.querySelector("#month-end").value
       endDay = document.querySelector("#day-end").value
 
+      startValue = document.querySelector("#value-start").value
+      endValue = document.querySelector("#value-end").value
+
       const loop = () => {
         const startDate = new Date(startYear, startMonth - 1, startDay, 0, 0, 0);
         const endDate = new Date(endYear, endMonth - 1, endDay, 0, 0, 0);
-        document.querySelector("#date-lerp").innerHTML = dateLerp(startDate, endDate, 0, 100);
+        document.querySelector("#date-lerp").innerHTML = dateLerp(startDate, endDate, startValue, endValue);
       }
       setInterval(loop,1000);
     }
@@ -76,6 +94,9 @@
           <input type="text" id="month-start" name="month" oninput="setStartMonth(this.value)"/>
           <label>day</label>
           <input type="text" id="day-start" name="day" oninput="setStartDay(this.value)"/>
+          <br/>
+          <label>value</label>
+          <input type="text" id="value-start" name="value" oninput="setStartValue(this.value)"/>
         </form>
         <label>end Date</label>
         <form>
@@ -85,6 +106,9 @@
           <input type="text" id="month-end" name="month" oninput="setEndMonth(this.value)"/>
           <label>day</label>
           <input type="text" id="day-end" name="day" oninput="setEndDay(this.value)"/>
+          <br/>
+          <label>value</label>
+          <input type="text" id="value-end" name="value" oninput="setEndValue(this.value)"/>
         </form>
       </div>
       <div>
