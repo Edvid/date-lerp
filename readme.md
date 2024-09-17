@@ -1,8 +1,13 @@
 # Simple Date lerper
 
+![screenshot](./screenshot.png)
+screenshot taken the 17th of september 2024, 7:24pm
+
 A simple site I created out of boredom before I had set up Internet in my new apartment and was running low on data from hotspot usage. I wanted to keep track of how much data I was allowed to use when, given I could only afford buying more data so-and-so often. 
 
 This site has more applications than that ofc. It's a site for whenever you want to check if you're over or under some target value, given what time it is.
+
+[Github Pages here](https://edvid.github.io/date-lerp/)
 
 # How to use
 
