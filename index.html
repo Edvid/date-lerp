@@ -50,7 +50,7 @@
       const toEndDiff = EndDate.getTime() - StartDate.getTime();
       const toNowDiff = now.getTime() - StartDate.getTime() + (StartDate.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
       const ratio = toNowDiff / toEndDiff;
-      return +StartValue + ratio * (endValue - StartValue);
+      return (+StartValue + ratio * (endValue - StartValue)).toFixed(5);
     }
 
     let startDate;
@@ -81,8 +81,7 @@
       endValue = document.querySelector("#value-end").value
 
       const loop = () => {
-        const lerp = dateLerp(startDate, endDate, startValue, endValue);
-        document.querySelector("#date-lerp").innerHTML = lerp.toFixed(5)
+        document.querySelector("#date-lerp").innerHTML = dateLerp(startDate, endDate, startValue, endValue);
       }
       setInterval(loop,1000);
       loop();
